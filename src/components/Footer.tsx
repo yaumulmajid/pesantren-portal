@@ -14,7 +14,7 @@ const Footer = () => {
                 <Building2 className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Al-Hidayah</h3>
+                <h3 className="text-xl font-bold">Miftahul Amanah</h3>
                 <p className="text-sm text-gray-400">Pondok Pesantren</p>
               </div>
             </div>
@@ -48,7 +48,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <Link 
                     to={item.path} 
-                    className="text-gray-400 hover:text-islamic-green transition-colors text-sm"
+                    className="text-gray-400 hover:text-islamic-green transition-all duration-300 hover:translate-x-1 text-sm inline-block"
                   >
                     {item.name}
                   </Link>
@@ -70,7 +70,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <Link 
                     to={item.path} 
-                    className="text-gray-400 hover:text-islamic-green transition-colors text-sm"
+                    className="text-gray-400 hover:text-islamic-green transition-all duration-300 hover:translate-x-1 text-sm inline-block"
                   >
                     {item.name}
                   </Link>
@@ -85,11 +85,19 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 text-islamic-green mt-1 flex-shrink-0" />
-                <p className="text-gray-400 text-sm">
-                  Jl. Pesantren No. 123<br />
-                  Desa Hidayah, Kec. Barokah<br />
-                  Kab. Berkah, Jawa Timur 12345
-                </p>
+                <div className="text-gray-400 text-sm">
+                  <p>Jl. Siliwangi No.KM.1, Rambipuji,</p>
+                  <p>Kec. Rambipuji, Kabupaten Jember,</p>
+                  <p>Jawa Timur 68152</p>
+                  <a 
+                    href="https://maps.app.goo.gl/HiCTELwFGxB3Qx299" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-islamic-green hover:underline mt-1 inline-block"
+                  >
+                    Lihat di Google Maps
+                  </a>
+                </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-islamic-green" />
@@ -97,7 +105,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-islamic-green" />
-                <p className="text-gray-400 text-sm">info@alhidayah.ac.id</p>
+                <p className="text-gray-400 text-sm">info@miftahulamanah.ac.id</p>
               </div>
             </div>
           </div>
@@ -105,7 +113,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Pondok Pesantren Al-Hidayah. Semua hak cipta dilindungi.
+            © 2024 Pondok Pesantren Miftahul Amanah. Semua hak cipta dilindungi.
           </p>
         </div>
       </div>
