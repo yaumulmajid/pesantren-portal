@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Mosque, MapPin, Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react";
+import { Building2, MapPin, Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-islamic-gradient rounded-lg">
-                <Mosque className="h-8 w-8 text-white" />
+                <Building2 className="h-8 w-8 text-white" />
               </div>
               <div>
                 <h3 className="text-xl font-bold">Al-Hidayah</h3>

@@ -1,7 +1,6 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { User, Calendar, MapPin, Phone, Mail, FileText, Upload, CheckCircle } from "lucide-react";
+import { User, Calendar, MapPin, Phone, Mail, FileText, Upload, CheckCircle, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -40,7 +39,7 @@ const Registration = () => {
 
   const requirements = [
     "Fotokopi Akta Kelahiran",
-    "Fotokopi Kartu Keluarga",
+    "Fotokopi Kartu Keluarga", 
     "Fotokopi KTP Orang Tua",
     "Pas Foto 3x4 (6 lembar)",
     "Fotokopi Ijazah/Rapor terakhir",

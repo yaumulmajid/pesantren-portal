@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Mosque } from "lucide-react";
+import { Menu, X, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
@@ -36,7 +36,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="p-2 bg-islamic-gradient rounded-lg group-hover:scale-110 transition-transform duration-300">
-              <Mosque className="h-8 w-8 text-white" />
+              <Building2 className="h-8 w-8 text-white" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-gray-800">Al-Hidayah</h2>
