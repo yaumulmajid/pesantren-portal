@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,38 +13,100 @@ import {
   Calendar,
   Activity
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const AdminDashboard = () => {
-  const stats = [
+  const [stats, setStats] = useState([
     {
       title: "Total Pengunjung",
-      value: "12,345",
-      change: "+12%",
+      value: "0",
+      change: "+0%",
       icon: Users,
       color: "text-blue-600"
     },
     {
       title: "Konten Aktif",
-      value: "25",
-      change: "+3",
+      value: "0",
+      change: "+0",
       icon: FileText,
       color: "text-green-600"
     },
     {
       title: "Media Files",
-      value: "148",
-      change: "+8",
+      value: "0",
+      change: "+0",
       icon: Image,
       color: "text-purple-600"
     },
     {
-      title: "Santri Terdaftar",
-      value: "89",
-      change: "+5",
+      title: "Total Users",
+      value: "0",
+      change: "+0",
       icon: TrendingUp,
       color: "text-orange-600"
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      // Fetch content count
+      const { count: contentCount } = await supabase
+        .from('content')
+        .select('*', { count: 'exact', head: true });
+
+      // Fetch media count
+      const { count: mediaCount } = await supabase
+        .from('media')
+        .select('*', { count: 'exact', head: true });
+
+      // Fetch profiles count
+      const { count: profilesCount } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true });
+
+      // Fetch analytics count
+      const { count: analyticsCount } = await supabase
+        .from('analytics')
+        .select('*', { count: 'exact', head: true });
+
+      setStats([
+        {
+          title: "Total Pengunjung",
+          value: analyticsCount?.toString() || "0",
+          change: "+0%",
+          icon: Users,
+          color: "text-blue-600"
+        },
+        {
+          title: "Konten Aktif",
+          value: contentCount?.toString() || "0",
+          change: "+0",
+          icon: FileText,
+          color: "text-green-600"
+        },
+        {
+          title: "Media Files",
+          value: mediaCount?.toString() || "0",
+          change: "+0",
+          icon: Image,
+          color: "text-purple-600"
+        },
+        {
+          title: "Total Users",
+          value: profilesCount?.toString() || "0",
+          change: "+0",
+          icon: TrendingUp,
+          color: "text-orange-600"
+        }
+      ]);
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+    }
+  };
 
   const recentActivities = [
     {

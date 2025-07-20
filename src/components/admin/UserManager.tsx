@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,39 +16,39 @@ import {
   Calendar,
   MoreHorizontal
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const UserManager = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const users = [
-    {
-      id: 1,
-      name: "Ahmad Fauzi",
-      email: "ahmad@miftahulamanah.ac.id",
-      role: "admin",
-      status: "active",
-      lastLogin: "2024-01-15 10:30",
-      joinDate: "2024-01-01"
-    },
-    {
-      id: 2,
-      name: "Siti Aminah",
-      email: "siti@miftahulamanah.ac.id", 
-      role: "editor",
-      status: "active",
-      lastLogin: "2024-01-14 15:45",
-      joinDate: "2024-01-05"
-    },
-    {
-      id: 3,
-      name: "Muhammad Yusuf",
-      email: "yusuf@miftahulamanah.ac.id",
-      role: "viewer",
-      status: "inactive", 
-      lastLogin: "2024-01-10 09:15",
-      joinDate: "2024-01-10"
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setUsers(data || []);
+    } catch (error) {
+      console.error('Error fetching users:', error);
     }
-  ];
+    setLoading(false);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-islamic-green"></div>
+      </div>
+    );
+  }
 
   const getRoleColor = (role: string) => {
     switch (role) {
@@ -56,18 +56,17 @@ const UserManager = () => {
         return "bg-red-100 text-red-700";
       case "editor":
         return "bg-blue-100 text-blue-700";
-      case "viewer":
+      case "user":
         return "bg-gray-100 text-gray-700";
       default:
         return "bg-gray-100 text-gray-700";
     }
   };
 
-  const getStatusColor = (status: string) => {
-    return status === "active" 
-      ? "bg-green-100 text-green-700" 
-      : "bg-gray-100 text-gray-700";
-  };
+  const filteredUsers = users.filter(user =>
+    user.display_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="space-y-6">
@@ -90,7 +89,7 @@ const UserManager = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{users.length}</div>
-            <p className="text-xs text-green-600">+1 dari bulan lalu</p>
+            <p className="text-xs text-green-600">Total registered users</p>
           </CardContent>
         </Card>
 
@@ -101,9 +100,9 @@ const UserManager = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {users.filter(u => u.status === "active").length}
+              {users.length}
             </div>
-            <p className="text-xs text-green-600">All users active</p>
+            <p className="text-xs text-green-600">All users</p>
           </CardContent>
         </Card>
 
@@ -141,30 +140,27 @@ const UserManager = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <div key={user.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
                 <div className="flex items-center space-x-4">
                   <div className="w-10 h-10 bg-islamic-gradient rounded-full flex items-center justify-center">
                     <User className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-medium">{user.name}</p>
+                    <p className="font-medium">{user.display_name || 'No Name'}</p>
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
                       <Mail className="h-3 w-3" />
-                      <span>{user.email}</span>
+                      <span>{user.user_id}</span>
                     </div>
                     <div className="flex items-center space-x-2 text-sm text-gray-500 mt-1">
                       <Calendar className="h-3 w-3" />
-                      <span>Last login: {user.lastLogin}</span>
+                      <span>Joined: {new Date(user.created_at).toLocaleDateString()}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Badge className={getRoleColor(user.role)}>
                     {user.role}
-                  </Badge>
-                  <Badge className={getStatusColor(user.status)}>
-                    {user.status}
                   </Badge>
                   <div className="flex space-x-1">
                     <Button size="sm" variant="ghost">
@@ -180,6 +176,12 @@ const UserManager = () => {
                 </div>
               </div>
             ))}
+            {filteredUsers.length === 0 && (
+              <div className="text-center py-8 text-gray-500">
+                <Users className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+                <p>No users found</p>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>

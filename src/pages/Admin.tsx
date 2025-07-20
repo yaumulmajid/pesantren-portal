@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,8 +14,10 @@ import {
   Eye,
   Edit,
   Trash2,
-  Plus
+  Plus,
+  LogOut
 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import ContentEditor from "@/components/admin/ContentEditor";
 import MediaManager from "@/components/admin/MediaManager";
@@ -23,6 +26,26 @@ import AdminSettings from "@/components/admin/AdminSettings";
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
+  const { user, loading, signOut } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-islamic-green mx-auto mb-4"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -36,9 +59,14 @@ const Admin = () => {
             <Badge variant="secondary">Miftahul Amanah</Badge>
           </div>
           <div className="ml-auto flex items-center space-x-4">
+            <span className="text-sm text-gray-600">{user.email}</span>
             <Button variant="outline" size="sm">
               <Eye className="h-4 w-4 mr-2" />
               Preview Site
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleSignOut}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
             </Button>
           </div>
         </div>
