@@ -11,6 +11,7 @@ import Gallery from "./pages/Gallery";
 import Donation from "./pages/Donation";
 import Registration from "./pages/Registration";
 import Contact from "./pages/Contact";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
