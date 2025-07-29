@@ -1,6 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Users, Target, Eye, Award, BookOpen, Heart } from "lucide-react";
+import { Target, Eye, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 
 const fadeInUp = {
@@ -9,35 +12,28 @@ const fadeInUp = {
 };
 
 const Profile = () => {
-  const facilities = [
-    "Masjid dengan kapasitas 1000 jamaah",
-    "Asrama putra dan putri yang nyaman",
-    "Perpustakaan dengan koleksi 10,000+ buku",
-    "Laboratorium komputer dan bahasa",
-    "Lapangan olahraga multifungsi",
-    "Klinik kesehatan 24 jam"
-  ];
+  const [profileData, setProfileData] = useState(null);
 
-  const leadership = [
-    {
-      name: "KH. Makmun Sidiq, S.Pd.I",
-      position: "Pengasuh/Pimpinan Pondok",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-      description: "Lulusan Al-Azhar Cairo dengan pengalaman 30+ tahun dalam dunia pendidikan Islam"
-    },
-    {
-      name: "Ustadz Dr. Muhammad Hakim",
-      position: "Direktur Pendidikan",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      description: "Doktor Pendidikan Islam dari UIN Jakarta, spesialis kurikulum terpadu"
-    },
-    {
-      name: "Ustadzah Dra. Siti Khadijah",
-      position: "Kepala Bagian Putri",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b332c3d8?w=300&h=300&fit=crop&crop=face",
-      description: "Magister Pendidikan dengan fokus pada pengembangan karakter santri putri"
-    }
-  ];
+  useEffect(() => {
+    fetch("/api/profile")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === "success") {
+          setProfileData(json.data);
+        }
+      });
+  }, []);
+
+  if (!profileData) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-white">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="w-16 h-16 rounded-full border-4 border-t-transparent border-r-yellow-500 border-b-green-600 border-l-yellow-500 animate-spin"></div>
+          <p className="text-gray-600 font-semibold">Memuat profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -54,11 +50,10 @@ const Profile = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Profil Pondok Pesantren Miftahul Amanah
+              {profileData.judul}
             </h1>
             <p className="text-xl text-gray-200 leading-relaxed">
-              Mengenal lebih dekat lembaga pendidikan Islam yang telah berdedikasi
-              selama lebih dari 20 tahun dalam mencetak generasi muslim berkualitas.
+              {profileData.deskripsi}
             </p>
           </motion.div>
         </div>
@@ -78,31 +73,21 @@ const Profile = () => {
               <h2 className="text-3xl font-bold text-gray-800 mb-6">
                 Sejarah <span className="text-gradient">Berdirinya</span>
               </h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  Pondok Pesantren Miftahul Amanah didirikan pada tahun 1998 oleh KH. Makmun Sidiq, S.Pd.I,
-                  dengan visi untuk menciptakan lembaga pendidikan Islam yang dapat menghasilkan
-                  generasi muslim yang tidak hanya kuat dalam ilmu agama, tetapi juga mampu bersaing
-                  di era modern.
-                </p>
-                <p>
-                  Berawal dari sebuah musholla kecil dengan 15 santri pertama, kini telah berkembang
-                  menjadi kompleks pesantren modern dengan lebih dari 150 santri dari berbagai daerah.
-                </p>
-                <p>
-                  Miftahul Amanah telah meluluskan lebih dari 100 alumni yang tersebar di berbagai profesi.
-                </p>
+              <div className="space-y-4 text-gray-600 leading-relaxed whitespace-pre-line">
+                {profileData.sejarah}
               </div>
             </div>
             <div className="relative">
               <img
-                src="images/hero.png"
+                src={`/storage/${profileData.gambar_sejarah}`}
                 alt="Sejarah"
                 className="rounded-xl shadow-lg w-full h-80 object-cover"
               />
               <div className="absolute -bottom-6 -right-6 bg-islamic-gold p-6 rounded-lg shadow-lg">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-800">1998</div>
+                  <div className="text-2xl font-bold text-gray-800">
+                    {profileData.tahun_berdiri}
+                  </div>
                   <div className="text-sm text-gray-600">Tahun Berdiri</div>
                 </div>
               </div>
@@ -141,10 +126,7 @@ const Profile = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800">Visi</h3>
               </div>
-              <p className="text-gray-600 text-lg">
-                "Menjadi lembaga pendidikan Islam terdepan yang menghasilkan generasi muslim
-                berakhlak mulia, berpengetahuan luas, dan mampu berkontribusi positif."
-              </p>
+              <p className="text-gray-600 text-lg">{profileData.visi}</p>
             </motion.div>
 
             <motion.div
@@ -161,15 +143,10 @@ const Profile = () => {
                 <h3 className="text-2xl font-bold text-gray-800">Misi</h3>
               </div>
               <ul className="space-y-3 text-gray-600">
-                {[
-                  "Menyelenggarakan pendidikan Islam yang holistik",
-                  "Mengintegrasikan kurikulum agama & umum",
-                  "Membentuk santri berakhlak dan pemimpin",
-                  "Lingkungan belajar yang kondusif"
-                ].map((misi, i) => (
+                {profileData.misi.map((item, i) => (
                   <li key={i} className="flex items-start">
                     <div className="w-2 h-2 bg-islamic-green rounded-full mt-2 mr-3"></div>
-                    {misi}
+                    {item.misi_item}
                   </li>
                 ))}
               </ul>
@@ -198,7 +175,7 @@ const Profile = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {facilities.map((facility, index) => (
+            {profileData.fasilitas.map((item, index) => (
               <motion.div
                 key={index}
                 className="bg-gray-50 p-6 rounded-lg text-center shadow-md"
@@ -210,7 +187,7 @@ const Profile = () => {
                 <div className="bg-islamic-gradient p-3 rounded-full inline-block mb-4">
                   <BookOpen className="h-6 w-6 text-white" />
                 </div>
-                <p className="text-gray-700 font-medium">{facility}</p>
+                <p className="text-gray-700 font-medium">{item.nama}</p>
               </motion.div>
             ))}
           </div>
@@ -237,9 +214,9 @@ const Profile = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {leadership.map((leader, index) => (
+            {profileData.pimpinan.map((p, i) => (
               <motion.div
-                key={index}
+                key={i}
                 variants={fadeInUp}
                 initial="hidden"
                 whileInView="visible"
@@ -247,13 +224,13 @@ const Profile = () => {
                 className="bg-white rounded-xl p-8 shadow-lg text-center"
               >
                 <img
-                  src={leader.image}
-                  alt={leader.name}
+                  src={`/storage/${p.foto}`}
+                  alt={p.nama}
                   className="w-24 h-24 rounded-full mx-auto mb-6 object-cover"
                 />
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{leader.name}</h3>
-                <p className="text-islamic-green font-semibold mb-4">{leader.position}</p>
-                <p className="text-gray-600 text-sm">{leader.description}</p>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{p.nama}</h3>
+                <p className="text-islamic-green font-semibold mb-4">{p.jabatan}</p>
+                <p className="text-gray-600 text-sm">{p.deskripsi}</p>
               </motion.div>
             ))}
           </div>

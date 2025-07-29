@@ -18,7 +18,7 @@ const CTA = () => {
             </h2>
             <p className="text-xl text-gray-200 mb-8 leading-relaxed">
               Bergabunglah dengan ribuan keluarga yang telah mempercayakan pendidikan 
-              putra-putri mereka di Pondok Pesantren Al-Hidayah. Daftarkan sekarang 
+              putra-putri mereka di Pondok Pesantren Miftahul Amanah. Daftarkan sekarang 
               dan dapatkan kesempatan pendidikan terbaik.
             </p>
 

@@ -1,30 +1,37 @@
-
+import { useEffect, useState } from "react";
 import { Star, Quote } from "lucide-react";
 
+
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Ahmad Fauzi",
-      role: "Alumni 2020 - Mahasiswa UI",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      content: "Al-Hidayah tidak hanya memberikan pendidikan agama yang kuat, tetapi juga mempersiapkan kami untuk bersaing di dunia akademik. Alhamdulillah sekarang saya bisa kuliah di kampus impian.",
-      rating: 5
-    },
-    {
-      name: "Siti Nurhaliza",
-      role: "Wali Santri",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b332c3d8?w=150&h=150&fit=crop&crop=face", 
-      content: "Perubahan akhlak anak saya sangat terlihat sejak mondok di Al-Hidayah. Para ustadz sangat perhatian dan sabar dalam mendidik. Saya sangat merekomendasikan pesantren ini.",
-      rating: 5
-    },
-    {
-      name: "Muhammad Rizki",
-      role: "Alumni 2019 - Entrepreneur",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      content: "Program life skill di Al-Hidayah sangat membantu saya dalam berwirausaha. Selain ilmu agama, saya juga dibekali dengan keterampilan praktis yang sangat berguna.",
-      rating: 5
+  const [testimonials, setTestimonials] = useState([]);
+  const [pagination, setPagination] = useState({ current_page: 1, last_page: 1,   next_page_url: null, prev_page_url: null });
+
+  const fetchTestimonials = async (page = 1) => {
+    try {
+      const res = await fetch(`/api/testimonials?page=${page}`);
+      const json = await res.json();
+      if (json.status === "success") {
+        setTestimonials(json.data.data);
+        setPagination({
+          current_page: json.data.current_page,
+          last_page: json.data.last_page,
+          next_page_url: json.data.next_page_url,
+          prev_page_url: json.data.prev_page_url,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to fetch testimonials:", error);
     }
-  ];
+  };
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
+
+  const goToPage = (page) => {
+    if (page < 1 || page > pagination.last_page) return;
+    fetchTestimonials(page);
+  };
 
   return (
     <section className="py-20 bg-gray-50">
@@ -36,7 +43,7 @@ const Testimonials = () => {
           </h2>
           <div className="w-20 h-1 bg-islamic-gradient rounded mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Dengarkan pengalaman mereka yang telah merasakan langsung kualitas 
+            Dengarkan pengalaman mereka yang telah merasakan langsung kualitas
             pendidikan di Pondok Pesantren Miftahul Amanah.
           </p>
         </div>
@@ -44,48 +51,76 @@ const Testimonials = () => {
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white rounded-xl p-8 shadow-lg hover-lift relative">
-              {/* Quote Icon */}
+            <div key={testimonial.id || index} className="bg-white rounded-xl p-8 shadow-lg hover-lift relative">
               <div className="absolute top-4 right-4 text-islamic-green opacity-20">
                 <Quote className="h-8 w-8" />
               </div>
-
-              {/* Rating */}
               <div className="flex space-x-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
+                {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 text-islamic-gold fill-current" />
                 ))}
               </div>
-
-              {/* Content */}
               <p className="text-gray-600 leading-relaxed mb-6 italic">
-                "{testimonial.content}"
+                {testimonial.testimoni.replace(/\"/g, '"')}
               </p>
-
-              {/* Author */}
               <div className="flex items-center space-x-4">
                 <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
+                  src={`storage/${testimonial.foto}`}
+                  alt={testimonial.nama}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
-                  <h4 className="font-semibold text-gray-800">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  <h4 className="font-semibold text-gray-800">{testimonial.nama}</h4>
+                  <p className="text-sm text-gray-500">
+                    {testimonial.angkatan || '-'}
+                  </p>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
+        {/* Pagination */}
+        <div className="flex justify-center mt-10 space-x-2 flex-wrap">
+          <button
+            onClick={() => goToPage(pagination.current_page - 1)}
+            disabled={pagination.current_page === 1}
+            className="px-4 py-2 rounded-full border text-sm text-gray-700 hover:bg-gray-100 disabled:opacity-50"
+          >
+            Sebelumnya
+          </button>
+
+          {[...Array(pagination.last_page)].map((_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => goToPage(i + 1)}
+              className={`px-4 py-2 rounded-full text-sm border ${
+                pagination.current_page === i + 1
+                  ? 'bg-islamic-gradient text-white'
+                  : 'hover:bg-gray-100 text-gray-700'
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => goToPage(pagination.current_page + 1)}
+            disabled={pagination.current_page === pagination.last_page}
+            className="px-4 py-2 rounded-full border text-sm text-gray-700 hover:bg-gray-100 disabled:opacity-50"
+          >
+            Selanjutnya
+          </button>
+        </div>
+
         {/* CTA */}
         <div className="text-center mt-12">
           <div className="bg-islamic-gradient rounded-xl p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Bergabunglah dengan Keluarga Besar Al-Hidayah
+              Bergabunglah dengan Keluarga Besar Miftahul Amanah
             </h3>
             <p className="text-gray-200 mb-6">
-              Rasakan sendiri pengalaman pendidikan yang berkualitas dan lingkungan 
+              Rasakan sendiri pengalaman pendidikan yang berkualitas dan lingkungan
               yang mendukung perkembangan spiritual dan akademik putra-putri Anda.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

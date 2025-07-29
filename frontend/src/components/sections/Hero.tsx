@@ -22,7 +22,7 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{
-          backgroundImage: `url('images/hero.png')`,
+          backgroundImage: `url('ui/images/hero.png')`,
         }}
       ></div>
 

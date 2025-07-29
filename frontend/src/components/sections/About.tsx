@@ -65,7 +65,7 @@ const About = () => {
           <div className="relative">
             <div className="bg-islamic-gradient rounded-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
               <img
-                src="/images/hero.png"
+                src="ui/images/hero.png"
                 alt="Masjid Mifathul Amanah"
                 className="w-full h-64 md:h-80 object-cover rounded-lg"
               />
