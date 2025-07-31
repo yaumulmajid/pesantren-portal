@@ -5,12 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import React, { useEffect, useState } from "react";
 
 const Contact = () => {
+  const [contactData, setContactData] = useState<any>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,45 +18,61 @@ const Contact = () => {
     message: "",
   });
 
+  useEffect(() => {
+    fetch("/api/contact")
+      .then((res) => res.json())
+      .then((data) => setContactData(data.data))
+      .catch((err) => console.error("Gagal memuat data kontak", err));
+  }, []);
+
+
+  if (!contactData) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-white">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="w-16 h-16 rounded-full border-4 border-t-transparent border-r-yellow-500 border-b-green-600 border-l-yellow-500 animate-spin"></div>
+          <p className="text-gray-600 font-semibold">Memuat Data Kontak...</p>
+        </div>
+      </div>
+    );
+  }
+
   const contactInfo = [
     {
       icon: MapPin,
       title: "Alamat Pesantren",
-      content: [
-        "Jl. Brigjen M. Isa No. 35 Cipadung,",
-        "Kec. Purwaharja, Kota Banjar,",
-        "Jawa Barat 46332",
-      ],
+      content: contactData.alamat.split(","),
       color: "bg-blue-500",
     },
     {
       icon: Phone,
       title: "Nomor Telepon",
       content: [
-        "Kantor: (0331) 123-456",
-        "HP: +62 812-3456-7890",
-        "WhatsApp: +62 812-3456-7890",
+        `Kantor: ${contactData.telepon_kantor}`,
+        `HP: ${contactData.telepon_hp}`,
+        `WhatsApp: ${contactData.telepon_wa}`,
       ],
       color: "bg-green-500",
     },
     {
       icon: Mail,
       title: "Email",
-      content: ["info@miftahulamanah.ac.id", "admin@miftahulamanah.ac.id"],
+      content: contactData.email instanceof Array
+        ? contactData.email
+        : [contactData.email],
       color: "bg-red-500",
     },
     {
       icon: Clock,
       title: "Jam Layanan",
       content: [
-        "Senin - Jumat: 08.00 - 16.00 WIB",
-        "Sabtu: 08.00 - 12.00 WIB",
-        "Minggu: Libur",
+        `Senin - Jumat: ${contactData.jam_kerja_senin_jumat}`,
+        `Sabtu: ${contactData.jam_kerja_sabtu}`,
+        `Minggu: ${contactData.jam_kerja_minggu}`,
       ],
       color: "bg-purple-500",
     },
   ];
-
   const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [field]: e.target.value }));
   };
@@ -72,16 +87,18 @@ const Contact = () => {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-islamic-gradient text-white">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Hubungi Kami</h1>
-          <p className="text-xl text-gray-200 leading-relaxed">
-            Kami siap membantu menjawab pertanyaan Anda seputar pendaftaran,
-            program pendidikan, atau informasi lainnya tentang Miftahul Amanah.
-          </p>
-        </div>
-      </section>
+    {/* Hero Section */}
+    <section className="pt-24 pb-12 bg-islamic-gradient text-white">
+      <div className="container mx-auto px-4 text-center max-w-3xl md:max-w-4xl">
+        <h1 className="text-3xl md:text-4xl font-semibold mb-4 tracking-tight">
+          Hubungi Kami
+        </h1>
+        <p className="text-base md:text-lg text-gray-100 leading-relaxed">
+          Kami siap membantu menjawab pertanyaan Anda seputar pendaftaran,
+          program pendidikan, atau informasi lainnya tentang Miftahul Amanah.
+        </p>
+      </div>
+    </section>
 
       {/* Contact Info */}
       <section className="py-20 bg-gray-50">

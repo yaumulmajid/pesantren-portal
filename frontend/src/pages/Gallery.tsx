@@ -56,14 +56,17 @@ const Gallery = () => {
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-islamic-gradient text-white">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Galeri Miftahul Amanah</h1>
-          <p className="text-xl text-gray-200 leading-relaxed">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <h1 className="text-3xl md:text-4xl font-semibold mb-4 tracking-tight">
+            Galeri Miftahul Amanah
+          </h1>
+          <p className="text-lg text-gray-100 leading-relaxed">
             Lihat berbagai kegiatan, fasilitas, dan momen berharga di 
             Pondok Pesantren Miftahul Amanah melalui koleksi foto dan video kami.
           </p>
         </div>
       </section>
+
 
       {/* Filter Buttons */}
       <section className="py-8 bg-white shadow-sm">

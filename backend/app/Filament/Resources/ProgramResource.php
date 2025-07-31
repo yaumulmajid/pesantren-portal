@@ -100,7 +100,13 @@ class ProgramResource extends Resource
                 TextColumn::make('kategori')->label('Kategori Program'),
                 TextColumn::make('created_at')->label('Dibuat')->since(),
             ])
-            ->defaultSort('id', 'desc');
+            ->defaultSort('id', 'desc')
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getPages(): array

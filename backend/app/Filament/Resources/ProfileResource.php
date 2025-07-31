@@ -150,7 +150,13 @@ class ProfileResource extends Resource
                     ->since()
                     ->sortable(),
             ])
-            ->defaultSort('id', 'desc');
+            ->defaultSort('id', 'desc')
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getPages(): array

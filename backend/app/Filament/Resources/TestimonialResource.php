@@ -61,7 +61,13 @@ class TestimonialResource extends Resource
                 TextColumn::make('testimoni')->limit(40),
                 TextColumn::make('created_at')->since()->label('Dibuat'),
             ])
-            ->defaultSort('id', 'desc');
+            ->defaultSort('id', 'desc')
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getPages(): array

@@ -46,21 +46,21 @@ const Programs = () => {
 
       {/* Hero */}
       <section className="pt-24 pb-16 bg-islamic-gradient from-islamic-green to-green-200 text-white text-center">
-        <div className="container mx-auto px-6 max-w-4xl">
+        <div className="container mx-auto px-6 max-w-3xl md:max-w-4xl">
           <motion.h1
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
             custom={0}
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-3xl md:text-4xl font-semibold mb-4 tracking-tight"
           >
             Program Pendidikan Unggulan
           </motion.h1>
           <motion.p
             variants={fadeInUp}
             custom={1}
-            className="text-lg text-white/80"
+            className="text-base md:text-lg text-white/80 leading-relaxed"
           >
             Menyediakan pendidikan Islam komprehensif dari usia dini hingga dewasa, berbasis Al-Qur’an dan kitab turats.
           </motion.p>

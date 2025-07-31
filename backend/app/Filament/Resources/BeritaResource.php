@@ -104,7 +104,13 @@ class BeritaResource extends Resource
                 ->label('Dibuat')
                 ->since(),
         ])
-        ->defaultSort('tanggal', 'desc');
+        ->defaultSort('tanggal', 'desc')
+        ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getPages(): array

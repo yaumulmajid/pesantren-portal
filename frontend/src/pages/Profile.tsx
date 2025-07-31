@@ -47,17 +47,18 @@ const Profile = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center max-w-4xl mx-auto"
+            className="text-center max-w-3xl md:max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="text-3xl md:text-4xl font-semibold mb-4 tracking-tight">
               {profileData.judul}
             </h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-100 leading-relaxed">
               {profileData.deskripsi}
             </p>
           </motion.div>
         </div>
       </section>
+
 
       {/* Sejarah */}
       <section className="py-20 bg-white">

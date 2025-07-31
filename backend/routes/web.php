@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BeritaController;
+use App\Http\Controllers\Api\ContactInfoController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProgramController;
@@ -19,6 +20,7 @@ Route::prefix('api')->group(function () {
     Route::get('/testimonials', [TestimonialController::class, 'show']);
     Route::get('/berita', [BeritaController::class, 'index']);
     Route::get('/berita/{id}', [BeritaController::class, 'show']);
+    Route::get('/contact', [ContactInfoController::class, 'show']);
 });
 
 Route::get('/{any}', function () {

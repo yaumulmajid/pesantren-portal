@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <img
-                src="ui/images/logo.png"
+                src="/ui/images/logo.png"
                 alt="Logo Miftahul Amanah"
                 className="h-14 w-auto rounded-lg"
               />
