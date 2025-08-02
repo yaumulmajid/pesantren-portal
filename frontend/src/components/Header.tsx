@@ -27,7 +27,7 @@ const Header = () => {
     { name: "Program", path: "/programs" },
     { name: "Galeri", path: "/gallery" },
     { name: "Berita", path: "/berita" }, 
-    { name: "Donasi", path: "/donation" },
+    // { name: "Donasi", path: "/donation" },
     // { name: "Pendaftaran", path: "/registration" },
     { name: "Kontak", path: "/contact" },
   ];
@@ -84,20 +84,19 @@ const Header = () => {
                 className="group flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-islamic-green bg-gray-50 hover:bg-green-50 rounded-full transition-all duration-300 hover:scale-105 shadow-sm border border-gray-200 hover:border-green-200"
                 title="Admin Panel"
               >
-                <Settings className="h-4 w-4 transition-transform duration-300 group-hover:rotate-90" />
                 <span className="hidden xl:inline">Login Admin</span>
               </button>
             </div>
 
             {/* CTA Button */}
-            <div className="hidden lg:block">
+            {/* <div className="hidden lg:block">
               <Button 
                 asChild
                 className="bg-islamic-gradient hover:opacity-90 text-white px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 shadow-md"
               >
                 <Link to="/donation">Donasi Sekarang</Link>
               </Button>
-            </div>
+            </div> */}
 
             {/* Mobile Menu Button */}
             <button
@@ -139,19 +138,18 @@ const Header = () => {
                 }}
                 className="w-full flex items-center justify-center space-x-2 px-4 py-3 text-sm font-medium text-gray-600 hover:text-islamic-green bg-gray-50 hover:bg-green-50 rounded-lg transition-all duration-300 border border-gray-200 hover:border-green-200"
               >
-                <Settings className="h-4 w-4" />
                 <span>Login Admin</span>
               </button>
 
               {/* Donation Button - Mobile */}
-              <Button 
+              {/* <Button 
                 asChild
                 className="w-full bg-islamic-gradient hover:opacity-90 text-white transition-all duration-300 hover:scale-105 shadow-md rounded-lg"
               >
                 <Link to="/donation" onClick={() => setIsMenuOpen(false)}>
                   Donasi Sekarang
                 </Link>
-              </Button>
+              </Button> */}
             </div>
           </div>
         )}

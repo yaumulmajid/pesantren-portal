@@ -63,26 +63,6 @@ const Donation = () => {
         </div>
       </section>
 
-
-      {/* Ajakan Infaq Umum */}
-      {/* <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-              Infaq <span className="text-gradient">Pendidikan & Pesantren</span>
-            </h2>
-            <p className="text-lg text-gray-600 mb-6">
-              Salurkan infaq terbaik Anda untuk mendukung pendidikan para santri,
-              pembangunan fasilitas, dan operasional harian Pondok Pesantren Miftahul Amanah. 
-              Setiap kontribusi Anda adalah investasi jariyah yang terus mengalir.
-            </p>
-            <div className="flex justify-center">
-              <Heart className="h-16 w-16 text-islamic-green" />
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Form Donasi */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
