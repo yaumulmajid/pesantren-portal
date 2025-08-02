@@ -29,7 +29,7 @@ const Profile = () => {
       <div className="flex items-center justify-center h-screen bg-white">
         <div className="flex flex-col items-center space-y-4">
           <div className="w-16 h-16 rounded-full border-4 border-t-transparent border-r-yellow-500 border-b-green-600 border-l-yellow-500 animate-spin"></div>
-          <p className="text-gray-600 font-semibold">Memuat profile...</p>
+          <p className="text-gray-600 text-sm font-semibold">Memuat profile...</p>
         </div>
       </div>
     );
@@ -49,10 +49,10 @@ const Profile = () => {
             variants={fadeInUp}
             className="text-center max-w-3xl md:max-w-4xl mx-auto"
           >
-            <h1 className="text-3xl md:text-4xl font-semibold mb-4 tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-semibold mb-4 tracking-tight">
               {profileData.judul}
             </h1>
-            <p className="text-base md:text-lg text-gray-100 leading-relaxed">
+            <p className="text-sm md:text-base text-gray-100 leading-relaxed">
               {profileData.deskripsi}
             </p>
           </motion.div>
@@ -71,10 +71,10 @@ const Profile = () => {
             className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           >
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">
                 Sejarah <span className="text-gradient">Berdirinya</span>
               </h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed whitespace-pre-line">
+              <div className="space-y-4 text-gray-600 text-sm leading-relaxed whitespace-pre-line">
                 {profileData.sejarah}
               </div>
             </div>
@@ -86,10 +86,10 @@ const Profile = () => {
               />
               <div className="absolute -bottom-6 -right-6 bg-islamic-gold p-6 rounded-lg shadow-lg">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-800">
+                  <div className="text-xl font-bold text-gray-800">
                     {profileData.tahun_berdiri}
                   </div>
-                  <div className="text-sm text-gray-600">Tahun Berdiri</div>
+                  <div className="text-xs text-gray-600">Tahun Berdiri</div>
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@ const Profile = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Visi & <span className="text-gradient">Misi</span>
             </h2>
             <div className="w-20 h-1 bg-islamic-gradient rounded mx-auto mb-6"></div>
@@ -123,11 +123,11 @@ const Profile = () => {
             >
               <div className="flex items-center mb-6">
                 <div className="bg-islamic-gradient p-3 rounded-lg mr-4">
-                  <Eye className="h-6 w-6 text-white" />
+                  <Eye className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">Visi</h3>
+                <h3 className="text-xl font-bold text-gray-800">Visi</h3>
               </div>
-              <p className="text-gray-600 text-lg">{profileData.visi}</p>
+              <p className="text-gray-600 text-sm">{profileData.visi}</p>
             </motion.div>
 
             <motion.div
@@ -139,11 +139,11 @@ const Profile = () => {
             >
               <div className="flex items-center mb-6">
                 <div className="bg-islamic-gradient p-3 rounded-lg mr-4">
-                  <Target className="h-6 w-6 text-white" />
+                  <Target className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">Misi</h3>
+                <h3 className="text-xl font-bold text-gray-800">Misi</h3>
               </div>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-gray-600 text-sm">
                 {profileData.misi.map((item, i) => (
                   <li key={i} className="flex items-start">
                     <div className="w-2 h-2 bg-islamic-green rounded-full mt-2 mr-3"></div>
@@ -166,11 +166,11 @@ const Profile = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Fasilitas <span className="text-gradient">Lengkap</span>
             </h2>
             <div className="w-20 h-1 bg-islamic-gradient rounded mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
               Sarana modern dan nyaman untuk mendukung kegiatan santri setiap hari.
             </p>
           </motion.div>
@@ -186,9 +186,9 @@ const Profile = () => {
                 viewport={{ once: true }}
               >
                 <div className="bg-islamic-gradient p-3 rounded-full inline-block mb-4">
-                  <BookOpen className="h-6 w-6 text-white" />
+                  <BookOpen className="h-5 w-5 text-white" />
                 </div>
-                <p className="text-gray-700 font-medium">{item.nama}</p>
+                <p className="text-gray-700 text-sm font-medium">{item.nama}</p>
               </motion.div>
             ))}
           </div>
@@ -205,11 +205,11 @@ const Profile = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               Pimpinan <span className="text-gradient">Pesantren</span>
             </h2>
             <div className="w-20 h-1 bg-islamic-gradient rounded mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
               Para pemimpin berpengalaman yang berdedikasi untuk kemajuan pendidikan Islam.
             </p>
           </motion.div>
@@ -229,9 +229,9 @@ const Profile = () => {
                   alt={p.nama}
                   className="w-24 h-24 rounded-full mx-auto mb-6 object-cover"
                 />
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{p.nama}</h3>
-                <p className="text-islamic-green font-semibold mb-4">{p.jabatan}</p>
-                <p className="text-gray-600 text-sm">{p.deskripsi}</p>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">{p.nama}</h3>
+                <p className="text-islamic-green font-semibold mb-4 text-sm">{p.jabatan}</p>
+                <p className="text-gray-600 text-xs">{p.deskripsi}</p>
               </motion.div>
             ))}
           </div>
@@ -247,17 +247,17 @@ const Profile = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6">
               Bergabunglah dengan Keluarga Miftahul Amanah
             </h2>
-            <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+            <p className="text-base text-gray-200 mb-8 max-w-2xl mx-auto">
               Rasakan sendiri kualitas pendidikan dan lingkungan yang mendukung perkembangan spiritual dan akademik.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-islamic-gold hover:bg-yellow-600 text-gray-900 font-semibold px-8 py-3 rounded-full transition-colors">
+              <button className="bg-islamic-gold hover:bg-yellow-600 text-gray-900 font-semibold px-8 py-3 rounded-full transition-colors text-sm">
                 Daftar Sekarang
               </button>
-              <button className="border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full transition-colors">
+              <button className="border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full transition-colors text-sm">
                 Kunjungi Pesantren
               </button>
             </div>

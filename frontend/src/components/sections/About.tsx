@@ -1,4 +1,3 @@
-
 import { Heart, Target, Eye, Lightbulb } from "lucide-react";
 
 const About = () => {
@@ -26,34 +25,34 @@ const About = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
                 Tentang <span className="text-gradient">Miftahul Amanah</span>
               </h2>
-              <div className="w-20 h-1 bg-islamic-gradient rounded"></div>
+              <div className="w-16 h-1 bg-islamic-gradient rounded"></div>
             </div>
 
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-base text-gray-600 leading-relaxed">
               Pondok Pesantren Miftahul Amanah didirikan dengan visi untuk mencetak generasi muslim 
               yang tidak hanya kuat dalam ilmu agama, tetapi juga mampu bersaing di era modern. 
               Kami mengembangkan kurikulum terpadu yang menggabungkan pendidikan agama dan umum.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {values.map((value, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-sm hover-lift">
-                  <div className="flex items-center space-x-4">
-                    <div className="p-3 bg-islamic-gradient rounded-lg">
-                      <value.icon className="h-6 w-6 text-white" />
+                <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover-lift">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-islamic-gradient rounded-lg flex-shrink-0">
+                      <value.icon className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-800 mb-1">{value.title}</h4>
-                      <p className="text-sm text-gray-600">{value.description}</p>
+                      <h4 className="font-semibold text-gray-800 mb-1 text-sm">{value.title}</h4>
+                      <p className="text-xs text-gray-600 leading-relaxed">{value.description}</p>
                     </div>
                   </div>
                 </div>
@@ -63,17 +62,17 @@ const About = () => {
 
           {/* Image */}
           <div className="relative">
-            <div className="bg-islamic-gradient rounded-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div className="bg-islamic-gradient rounded-2xl p-6">
               <img
                 src="ui/images/hero.png"
                 alt="Masjid Mifathul Amanah"
                 className="w-full h-64 md:h-80 object-cover rounded-lg"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-islamic-gold p-6 rounded-lg shadow-lg">
+            <div className="absolute -bottom-4 -left-4 bg-islamic-gold p-4 rounded-lg shadow-lg">
               <div className="text-center">
-                <div className="text-2xl font-bold text-gray-800">20+</div>
-                <div className="text-sm text-gray-600">Tahun Pengalaman</div>
+                <div className="text-xl font-bold text-gray-800">20+</div>
+                <div className="text-xs text-gray-600">Tahun Pengalaman</div>
               </div>
             </div>
           </div>

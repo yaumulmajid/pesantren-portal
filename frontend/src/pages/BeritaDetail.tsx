@@ -32,10 +32,10 @@ export default function BeritaDetail() {
     return (
       <>
         <Header />
-        <div className="flex items-center justify-center h-screen bg-white">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="w-16 h-16 rounded-full border-4 border-t-transparent border-r-yellow-500 border-b-green-600 border-l-yellow-500 animate-spin"></div>
-            <p className="text-gray-600 font-semibold">Memuat berita...</p>
+        <div className="flex items-center justify-center h-96 bg-white">
+          <div className="flex flex-col items-center space-y-3">
+            <div className="w-12 h-12 rounded-full border-3 border-t-transparent border-r-yellow-500 border-b-green-600 border-l-yellow-500 animate-spin"></div>
+            <p className="text-gray-600 font-medium text-sm">Memuat berita...</p>
           </div>
         </div>
         <Footer />
@@ -49,23 +49,23 @@ export default function BeritaDetail() {
     <>
       <Header />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="mb-6 rounded-lg overflow-hidden">
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <div className="mb-4 rounded-lg overflow-hidden">
             <img
               src={`/storage/${berita.thumbnail}`}
               alt={berita.judul}
-              className="w-full object-cover max-h-[400px] mx-auto rounded-lg shadow-md"
+              className="w-full object-cover max-h-[320px] mx-auto rounded-lg shadow-sm"
             />
           </div>
 
-          <div className="flex flex-wrap items-center text-sm text-gray-500 mb-4 space-x-4">
+          <div className="flex flex-wrap items-center text-xs text-gray-500 mb-3 space-x-3">
             <div className="flex items-center">
-              <Calendar className="h-4 w-4 mr-1" />
+              <Calendar className="h-3 w-3 mr-1" />
               {formatTanggalIndo(berita.tanggal)}
             </div>
             <div className="flex items-center">
-              <User className="h-4 w-4 mr-1" />
+              <User className="h-3 w-3 mr-1" />
               {berita.penulis}
             </div>
             <div>
@@ -75,24 +75,24 @@ export default function BeritaDetail() {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          <h1 className="text-2xl font-bold text-gray-800 mb-3">
             {berita.judul}
           </h1>
 
           <div
-            className="prose max-w-none text-gray-700"
+            className="prose max-w-none text-gray-700 text-sm"
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(berita.konten || ""),
             }}
           ></div>
 
           {/* Link kembali di bawah konten */}
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
             <Link
               to="/berita"
-              className="inline-flex items-center text-sm text-islamic-green hover:underline"
+              className="inline-flex items-center text-xs text-islamic-green hover:underline"
             >
-              <ArrowLeft className="w-4 h-4 mr-1" /> Kembali ke Berita
+              <ArrowLeft className="w-3 h-3 mr-1" /> Kembali ke Berita
             </Link>
           </div>
         </div>

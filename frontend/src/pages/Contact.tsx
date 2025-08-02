@@ -31,7 +31,7 @@ const Contact = () => {
       <div className="flex items-center justify-center h-screen bg-white">
         <div className="flex flex-col items-center space-y-4">
           <div className="w-16 h-16 rounded-full border-4 border-t-transparent border-r-yellow-500 border-b-green-600 border-l-yellow-500 animate-spin"></div>
-          <p className="text-gray-600 font-semibold">Memuat Data Kontak...</p>
+          <p className="text-gray-600 text-sm font-semibold">Memuat kontak...</p>
         </div>
       </div>
     );
@@ -57,9 +57,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: contactData.email instanceof Array
-        ? contactData.email
-        : [contactData.email],
+      content: contactData.emails ? contactData.emails.map((email: any) => email.value) : [],
       color: "bg-red-500",
     },
     {
@@ -88,12 +86,12 @@ const Contact = () => {
       <Header />
 
     {/* Hero Section */}
-    <section className="pt-24 pb-12 bg-islamic-gradient text-white">
-      <div className="container mx-auto px-4 text-center max-w-3xl md:max-w-4xl">
-        <h1 className="text-3xl md:text-4xl font-semibold mb-4 tracking-tight">
+    <section className="pt-20 pb-10 bg-islamic-gradient text-white">
+      <div className="container mx-auto px-4 text-center max-w-2xl md:max-w-3xl">
+        <h1 className="text-2xl md:text-3xl font-semibold mb-3 tracking-tight">
           Hubungi Kami
         </h1>
-        <p className="text-base md:text-lg text-gray-100 leading-relaxed">
+        <p className="text-sm md:text-base text-gray-100 leading-relaxed">
           Kami siap membantu menjawab pertanyaan Anda seputar pendaftaran,
           program pendidikan, atau informasi lainnya tentang Miftahul Amanah.
         </p>
@@ -101,31 +99,31 @@ const Contact = () => {
     </section>
 
       {/* Contact Info */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
               Informasi <span className="text-gradient">Kontak</span>
             </h2>
-            <div className="w-20 h-1 bg-islamic-gradient rounded mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <div className="w-16 h-1 bg-islamic-gradient rounded mx-auto mb-4"></div>
+            <p className="text-base text-gray-600 max-w-xl mx-auto">
               Berikut adalah berbagai cara untuk menghubungi Pondok Pesantren Miftahul Amanah.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
               <Card key={index} className="hover-lift text-center">
                 <CardHeader>
-                  <div className={`${info.color} p-4 rounded-full inline-block mx-auto mb-4`}>
-                    <info.icon className="h-6 w-6 text-white" />
+                  <div className={`${info.color} p-3 rounded-full inline-block mx-auto mb-3`}>
+                    <info.icon className="h-5 w-5 text-white" />
                   </div>
-                  <CardTitle className="text-lg">{info.title}</CardTitle>
+                  <CardTitle className="text-base">{info.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     {info.content.map((item, idx) => (
-                      <p key={idx} className="text-gray-600 text-sm">
+                      <p key={idx} className="text-gray-600 text-xs">
                         {item}
                       </p>
                     ))}
@@ -138,23 +136,23 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Map */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Form */}
           <div>
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-3">
                 Kirim <span className="text-gradient">Pesan</span>
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-base text-gray-600">
                 Sampaikan pertanyaan atau masukan Anda melalui form di bawah ini.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
                     Nama Lengkap *
                   </label>
                   <Input
@@ -165,7 +163,7 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
                     Email *
                   </label>
                   <Input
@@ -178,9 +176,9 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
                     Nomor Telepon
                   </label>
                   <Input
@@ -191,7 +189,7 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
                     Subjek *
                   </label>
                   <Input
@@ -204,69 +202,69 @@ const Contact = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs font-medium text-gray-700 mb-1.5">
                   Pesan *
                 </label>
                 <Textarea
                   required
-                  rows={6}
+                  rows={5}
                   placeholder="Tulis pesan Anda di sini..."
                   value={formData.message}
                   onChange={handleInputChange("message")}
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-islamic-gradient hover:opacity-90 text-white py-3">
-                <Send className="mr-2 h-4 w-4" />
+              <Button type="submit" className="w-full bg-islamic-gradient hover:opacity-90 text-white py-2.5 text-sm">
+                <Send className="mr-2 h-3 w-3" />
                 Kirim Pesan
               </Button>
             </form>
           </div>
 
           {/* Map & Contact Action */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Lokasi Pesantren</h3>
-              <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Lokasi Pesantren</h3>
+              <div className="bg-gray-200 rounded-lg h-56 flex items-center justify-center">
                 <div className="text-center text-gray-500">
-                  <MapPin className="h-12 w-12 mx-auto mb-2" />
+                  <MapPin className="h-10 w-10 mx-auto mb-2" />
                   <a 
                     href="https://maps.app.goo.gl/HiCTELwFGxB3Qx299" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-islamic-green hover:underline mt-1 inline-block"
+                    className="text-islamic-green hover:underline mt-1 inline-block text-sm"
                   >
                     Lihat di Google Maps
                   </a>
-                  <p className="text-sm">Jl. Brigjen M. Isa No. 35 Cipadung</p>
+                  <p className="text-xs">Jl. Brigjen M. Isa No. 35 Cipadung</p>
                 </div>
               </div>
             </div>
 
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <MessageSquare className="mr-2 h-5 w-5" />
+                <CardTitle className="flex items-center text-base">
+                  <MessageSquare className="mr-2 h-4 w-4" />
                   Kontak Langsung
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between p-2.5 bg-green-50 rounded-lg">
                   <div>
-                    <p className="font-semibold text-gray-800">WhatsApp</p>
-                    <p className="text-sm text-gray-600">Respon cepat 24/7</p>
+                    <p className="font-semibold text-gray-800 text-sm">WhatsApp</p>
+                    <p className="text-xs text-gray-600">Respon cepat 24/7</p>
                   </div>
-                  <Button size="sm" className="bg-green-500 hover:bg-green-600">
+                  <Button size="sm" className="bg-green-500 hover:bg-green-600 text-xs">
                     Chat Now
                   </Button>
                 </div>
 
-                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                <div className="flex items-center justify-between p-2.5 bg-blue-50 rounded-lg">
                   <div>
-                    <p className="font-semibold text-gray-800">Telepon</p>
-                    <p className="text-sm text-gray-600">Senin-Jumat 08.00-16.00</p>
+                    <p className="font-semibold text-gray-800 text-sm">Telepon</p>
+                    <p className="text-xs text-gray-600">Senin-Jumat 08.00-16.00</p>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="text-xs">
                     Call Now
                   </Button>
                 </div>
@@ -277,15 +275,15 @@ const Contact = () => {
       </section>
 
       {/* Visit Us */}
-      <section className="py-20 bg-islamic-gradient text-white">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Kunjungi Pesantren Kami</h2>
-          <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+      <section className="py-16 bg-islamic-gradient text-white">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Kunjungi Pesantren Kami</h2>
+          <p className="text-lg text-gray-200 mb-6 leading-relaxed">
             Kami mengundang Anda untuk berkunjung langsung ke pesantren dan melihat
             fasilitas serta lingkungan belajar yang kondusif untuk putra-putri Anda.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {[
               {
                 icon: Clock,
@@ -318,25 +316,25 @@ const Contact = () => {
                 ),
               },
             ].map((item, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                <item.icon className="h-8 w-8 text-islamic-gold mx-auto mb-4" />
-                <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
-                <p className="text-gray-200 text-sm">{item.content}</p>
+              <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <item.icon className="h-6 w-6 text-islamic-gold mx-auto mb-3" />
+                <h4 className="font-semibold text-base mb-2">{item.title}</h4>
+                <p className="text-gray-200 text-xs">{item.content}</p>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               size="lg"
-              className="bg-islamic-gold hover:bg-yellow-600 text-gray-900 font-semibold px-8 py-3 rounded-full"
+              className="bg-islamic-gold hover:bg-yellow-600 text-gray-900 font-semibold px-6 py-2.5 rounded-full text-sm"
             >
               Reservasi Kunjungan
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full"
+              className="border-white text-white hover:bg-white hover:text-gray-900 px-6 py-2.5 rounded-full text-sm"
             >
               Download Brosur
             </Button>

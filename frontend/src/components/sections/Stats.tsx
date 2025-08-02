@@ -1,4 +1,3 @@
-
 import { Users, BookOpen, Award, GraduationCap } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
@@ -93,40 +92,40 @@ const Stats = () => {
   }, [isVisible]);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-islamic-gradient">
+    <section ref={sectionRef} className="py-12 bg-islamic-gradient">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             Prestasi & Pencapaian
           </h2>
-          <div className="w-20 h-1 bg-islamic-gold rounded mx-auto mb-6"></div>
-          <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+          <div className="w-16 h-1 bg-islamic-gold rounded mx-auto mb-4"></div>
+          <p className="text-base text-gray-200 max-w-2xl mx-auto">
             Berkat dukungan dan doa dari berbagai pihak, Miftahul Amanah terus berkembang 
             dan menghasilkan prestasi membanggakan.
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => {
             const countKey = Object.keys(counts)[index] as keyof typeof counts;
             return (
-              <div key={index} className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-8 hover-lift">
-                <div className="bg-islamic-gold p-4 rounded-full inline-block mb-6">
-                  <stat.icon className="h-8 w-8 text-gray-800" />
+              <div key={index} className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 hover-lift">
+                <div className="bg-islamic-gold p-3 rounded-full inline-block mb-4">
+                  <stat.icon className="h-6 w-6 text-gray-800" />
                 </div>
                 
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {counts[countKey].toLocaleString()}
                   {index === 2 && "+"}
                 </div>
                 
-                <h3 className="text-xl font-semibold text-islamic-gold mb-2">
+                <h3 className="text-lg font-semibold text-islamic-gold mb-1">
                   {stat.label}
                 </h3>
                 
-                <p className="text-gray-200 text-sm">
+                <p className="text-gray-200 text-xs">
                   {stat.description}
                 </p>
               </div>
@@ -135,12 +134,12 @@ const Stats = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="mt-16 text-center">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
+        <div className="mt-10 text-center">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 max-w-4xl mx-auto">
+            <h3 className="text-xl font-bold text-white mb-3">
               Komitmen Kami Terhadap Kualitas
             </h3>
-            <p className="text-gray-200 leading-relaxed">
+            <p className="text-gray-200 leading-relaxed text-sm">
               Setiap angka di atas mewakili dedikasi kami dalam memberikan pendidikan terbaik. 
               Dengan dukungan tenaga pengajar berkualitas, fasilitas modern, dan kurikulum yang 
               terintegrasi, kami terus berupaya mencetak generasi muslim yang unggul dan berakhlak mulia.
