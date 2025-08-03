@@ -7,6 +7,7 @@ Portal management system untuk pesantren dengan backend Laravel dan frontend Rea
 - **Backend**: Laravel (PHP)
 - **Frontend**: React
 - **Database**: MySQL/PostgreSQL
+- **Deployment**: Vercel
 
 ## 📋 Prerequisites
 
@@ -101,8 +102,18 @@ cd ../backend
 ```bash
 php artisan serve
 ```
-
 Aplikasi akan berjalan di `http://localhost:8000`
+
+## 🔐 Default Login
+
+Setelah instalasi selesai, Anda dapat login menggunakan akun default:
+
+```
+Username: admin@gmail.com
+Password: admin
+```
+
+> **Note**: Pastikan untuk mengubah password default setelah login pertama untuk keamanan.
 
 ## 📁 Project Structure
 
