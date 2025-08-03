@@ -17,7 +17,7 @@ const Header = () => {
   }, []);
 
   const handleAdminLogin = () => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+    const backendUrl = import.meta.env.NEXT_PUBLIC_BACKEND_URL || 'https://miftahulamanah.yaumulmajid.com';
     window.open(`${backendUrl}/admin`, '_blank');
   };
 
